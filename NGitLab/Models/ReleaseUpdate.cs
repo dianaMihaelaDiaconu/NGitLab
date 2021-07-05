@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace NGitLab.Models
 {
@@ -7,5 +8,14 @@ namespace NGitLab.Models
     {
         [DataMember(Name = "description")]
         public string Description;
+
+        [DataMember(Name = "name")]
+        public string Name;
+
+        [DataMember(Name = "milestones")]
+        public string[] Milestones;
+
+        [DataMember(Name = "released_at")]
+        public DateTime? ReleasedAt;
     }
 }
