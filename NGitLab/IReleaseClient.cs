@@ -1,16 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NGitLab.Models;
 
 namespace NGitLab
 {
     public interface IReleaseClient
     {
-        ReleaseInfo Create(ReleaseCreate release);
+        IEnumerable<Release> All { get; }
 
-        ReleaseInfo Update(ReleaseUpdate release);
+        Release this[string tagName] { get; }
 
-        void Delete(string name);
+        Release Create(ReleaseCreate data);
 
-        IEnumerable<ReleaseInfo> All { get; }
+        Release Update(string tagName, ReleaseUpdate data);
+
+        void Delete(string tagName);
+
+        IReleaseLinkClient ReleaseLinks(string tagName);
     }
 }

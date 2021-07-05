@@ -7,23 +7,34 @@ namespace NGitLab.Models
     public class ReleaseCreate
     {
         /// <summary>
-        /// (required) - The name of the release from which the release is build on
+        /// (required) - The tag where the release is created from.
         /// </summary>
         [Required]
         [DataMember(Name = "tag_name")]
-        public string Name;
+        public string TagName;
 
         /// <summary>
-        /// (required) - Create release using commit SHA, a tag name, or branch name.
-        /// </summary>
-        [Required]
-        [DataMember(Name = "ref")]
-        public string Ref;
-
-        /// <summary>
-        /// (optional) - Add release notes to the git release and store it in the GitLab database.
+        /// (optional) - The description of the release.
         /// </summary>
         [DataMember(Name = "description")]
         public string Description;
+
+        /// <summary>
+        /// (optional) - The release name.
+        /// </summary>
+        [DataMember(Name = "name")]
+        public string Name;
+
+        /// <summary>
+        ///  - The release name.
+        /// </summary>
+        [DataMember(Name = "ref")]
+        public string Ref;
+
+        [DataMember(Name = "milestones")]
+        public string[] Milestones;
+
+        [DataMember(Name = "assets")]
+        public ReleaseAssetsInfo Assets;
     }
 }
