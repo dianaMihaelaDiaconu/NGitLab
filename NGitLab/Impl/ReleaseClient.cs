@@ -24,7 +24,7 @@ namespace NGitLab.Impl
 
         public Release Create(ReleaseCreate data) => _api.Post().With(data).To<Release>(_releasesPath);
 
-        public Release Update(string tagName, ReleaseUpdate data) => _api.Put().With(data).To<Release>($"{_releasesPath}/{WebUtility.UrlEncode(tagName)}");
+        public Release Update(ReleaseUpdate data) => _api.Put().With(data).To<Release>($"{_releasesPath}/{WebUtility.UrlEncode(data.TagName)}");
 
         public void Delete(string tagName) => _api.Delete().Execute($"{_releasesPath}/{WebUtility.UrlEncode(tagName)}");
 

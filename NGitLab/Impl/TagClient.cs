@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using NGitLab.Models;
 
@@ -26,5 +27,17 @@ namespace NGitLab.Impl
         }
 
         public IEnumerable<Tag> All => _api.Get().GetAll<Tag>(_tagsPath + "?per_page=50");
+
+        [Obsolete("Starting in Gitlab 14 releases cannot be created trough tags. Use `ReleaseClient.Create` instead", false)]
+        public RealeaseInfo CreateRelease(string name, ReleaseCreate data)
+        {
+            return _api.Post().With(data).To<RealeaseInfo>($"{_tagsPath}/{WebUtility.UrlEncode(name)}/release");
+        }
+
+        [Obsolete("Starting in Gitlab 14 releases cannot be updated trough tags. Use `ReleaseClient.Update` instead", false)]
+        public RealeaseInfo UpdateRelease(string name, ReleaseUpdate data)
+        {
+            return _api.Put().With(data).To<RealeaseInfo>($"{_tagsPath}/{WebUtility.UrlEncode(name)}/release");
+        }
     }
 }

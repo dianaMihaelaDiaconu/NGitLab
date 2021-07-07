@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NGitLab.Models;
 
 namespace NGitLab.Mock.Clients
@@ -28,7 +26,7 @@ namespace NGitLab.Mock.Clients
                 }
             }
         }
-        
+
         public Models.Release this[string tagName]
         {
             get
@@ -53,12 +51,12 @@ namespace NGitLab.Mock.Clients
             }
         }
 
-        public Models.Release Update(string tagName, ReleaseUpdate data)
+        public Models.Release Update(ReleaseUpdate data)
         {
             using (Context.BeginOperationScope())
             {
                 var project = GetProject(_projectId, ProjectPermission.View);
-                var release = project.Releases.GetByTagName(tagName);
+                var release = project.Releases.GetByTagName(data.TagName);
                 if (release == null)
                 {
                     throw new GitLabNotFoundException();

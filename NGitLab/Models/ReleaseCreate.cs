@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace NGitLab.Models
@@ -26,15 +27,27 @@ namespace NGitLab.Models
         public string Name;
 
         /// <summary>
-        ///  - The release name.
+        ///  - Required if tag_name doesn't exist. It can be a commit SHA, a tag name, or a branch name.
         /// </summary>
         [DataMember(Name = "ref")]
         public string Ref;
 
+        /// <summary>
+        ///  - The title of each milestone the release is associated with.
+        /// </summary>
         [DataMember(Name = "milestones")]
         public string[] Milestones;
 
+        /// <summary>
+        ///  - Assets containing an array of links.
+        /// </summary>
         [DataMember(Name = "assets")]
         public ReleaseAssetsInfo Assets;
+
+        /// <summary>
+        ///  - The date when the release is/was ready. Defaults to the current time.
+        /// </summary>
+        [DataMember(Name = "released_at")]
+        public DateTime? ReleasedAt;
     }
 }

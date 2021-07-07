@@ -12,7 +12,7 @@ namespace NGitLab
 
         Release Create(ReleaseCreate data);
 
-        Release Update(string tagName, ReleaseUpdate data);
+        Release Update(ReleaseUpdate data);
 
         void Delete(string tagName);
 

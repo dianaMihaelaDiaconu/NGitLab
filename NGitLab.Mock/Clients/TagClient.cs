@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NGitLab.Models;
 
@@ -36,13 +37,14 @@ namespace NGitLab.Mock.Clients
             }
         }
 
-        public ReleaseInfo CreateRelease(string name, ReleaseCreate data)
+        [Obsolete("Starting in Gitlab 14 releases cannot be created trough tags. Use `ReleaseClient.Create` instead", false)]
+        public RealeaseInfo CreateRelease(string name, ReleaseCreate data)
         {
             using (Context.BeginOperationScope())
             {
                 var project = GetProject(_projectId, ProjectPermission.Contribute);
                 var tag = project.Repository.CreateReleaseTag(name, data.Description);
-                return new ReleaseInfo
+                return new RealeaseInfo
                 {
                     TagName = tag.Name,
                     Description = tag.ReleaseNotes,
@@ -59,14 +61,15 @@ namespace NGitLab.Mock.Clients
             }
         }
 
-        public ReleaseInfo UpdateRelease(string name, ReleaseUpdate data)
+        [Obsolete("Starting in Gitlab 14 releases cannot be updated trough tags. Use `ReleaseClient.Update` instead", false)]
+        public RealeaseInfo UpdateRelease(string name, ReleaseUpdate data)
         {
             using (Context.BeginOperationScope())
             {
                 var project = GetProject(_projectId, ProjectPermission.Contribute);
                 var tag = project.Repository.UpdateReleaseTag(name, data.Description);
 
-                return new ReleaseInfo
+                return new RealeaseInfo
                 {
                     TagName = tag.Name,
                     Description = tag.ReleaseNotes,
@@ -83,7 +86,7 @@ namespace NGitLab.Mock.Clients
             {
                 Commit = commit.ToCommitInfo(),
                 Name = tag.FriendlyName,
-                Release = new ReleaseInfo
+                Release = new RealeaseInfo
                 {
                     Description = project.Repository.GetReleaseTag(tag.FriendlyName)?.ReleaseNotes,
                     TagName = tag.FriendlyName,

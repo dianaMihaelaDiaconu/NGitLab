@@ -39,8 +39,9 @@ namespace NGitLab.Tests.Release
             Assert.That(release.Name, Is.EqualTo("0.7"));
             Assert.That(release.Description, Is.EqualTo("test"));
 
-            release = releaseClient.Update("0.7", new ReleaseUpdate
+            release = releaseClient.Update(new ReleaseUpdate
             {
+                TagName = "0.7",
                 Description = "test updated",
             });
             Assert.That(release.TagName, Is.EqualTo("0.7"));
@@ -80,7 +81,7 @@ namespace NGitLab.Tests.Release
             {
                 Name = "test link",
                 Filepath = "/bin/test",
-                Url = "https://www.example.com"
+                Url = "https://www.example.com",
             });
             Assert.That(link.Name, Is.EqualTo("test link"));
             Assert.That(link.Url, Is.EqualTo("https://www.example.com"));
